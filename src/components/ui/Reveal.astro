@@ -1,0 +1,44 @@
+---
+interface Props {
+  as?: 'div' | 'section';
+  class?: string;
+}
+
+const { as: Tag = 'div', class: className }: Props = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'opacity-0 translate-y-4 transition-[opacity,transform] duration-500 ease-select',
+    className,
+  ]}
+  data-reveal
+>
+  <slot />
+</Tag>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  elements.forEach((el) => {
+    if (prefersReduced) {
+      el.classList.remove('opacity-0', 'translate-y-4');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.remove('opacity-0', 'translate-y-4');
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
+  });
+</script>

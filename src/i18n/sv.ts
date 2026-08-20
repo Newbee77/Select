@@ -61,6 +61,65 @@ export const sv: Dict = {
       description: 'Sidan du sökte finns inte. Här är vägen tillbaka.',
     },
   },
+  home: {
+    hero: {
+      eyebrow: 'IT-konsulter · Öresundsregionen',
+      heading: 'Där IT-experter trivs',
+      lead: 'Vi är seniorkonsulterna som tröttnade på att vänta på den perfekta arbetsgivaren. Så vi blev den.',
+      ctaPrimary: 'Se vad vi gör →',
+      ctaSecondary: 'Jobba hos oss',
+    },
+    trustBar: ['Enbart seniora konsulter', 'Frihet under ansvar', 'Konsultägt'],
+    services: {
+      eyebrow: 'För dig som köper IT',
+      heading: 'Vi leder arbetet, ni får resultatet',
+      lead: 'Vi börjar inte i lösningen. Först förstår vi vad ni faktiskt behöver — sen leder vi arbetet dit.',
+      cards: [
+        {
+          number: '01',
+          title: 'Analys',
+          body: 'Vi kartlägger nuläget, sätter mål och väljer väg. Ibland är slutsatsen att ni inte behöver göra något alls. Det säger vi också.',
+        },
+        {
+          number: '02',
+          title: 'Genomförande',
+          body: 'Vi leder genomförandet — projektet, införandet och förändringen som följer med. Seniora konsulter som tar ansvar utan att behöva hållas i handen.',
+        },
+        {
+          number: '03',
+          title: 'Uppföljning',
+          body: 'Vi utvärderar det vi levererat och förbättrar processen. Ett avslutat uppdrag är inte samma sak som ett avslutat ansvar.',
+        },
+      ],
+      cta: 'Läs mer om vårt erbjudande →',
+    },
+    whyUs: {
+      eyebrow: 'Vår idé',
+      heading: 'Vi byggde arbetsplatsen vi själva ville jobba på',
+      paragraphs: [
+        'Select Society startades av konsulter som hade sett hur branschen fungerar — och hur den skulle kunna fungera. Vi tror att nöjda konsulter levererar bättre. Det är inte en värdegrund på en vägg, det är hela affärsmodellen.',
+        'Därför är vi få, seniora och noga med vilka som får följa med. Därför får våra konsulter frihet under ansvar, tid för utveckling och en gemenskap som faktiskt märks. Och därför får våra kunder människor som vill vara där de är.',
+      ],
+      cta: 'Om oss →',
+    },
+    forConsultants: {
+      eyebrow: 'För dig som är konsult',
+      heading: 'Gräset är faktiskt grönare här',
+      lead: 'Vi rekryterar sällan och noggrant. Om du är senior, nyfiken och trött på att vara en rad i ett resursschema — hör av dig.',
+      ticks: [
+        'Frihet under ansvar — du väljer uppdrag, vi backar upp',
+        'Tid och budget för kompetensutveckling',
+        'En gemenskap som faktiskt träffas',
+        'Rak kommunikation och ingen konsultfabrik',
+      ],
+      cta: 'Bli en av oss →',
+    },
+    ctaBand: {
+      heading: 'Ska vi ta ett samtal?',
+      text: 'Oavsett om du behöver en konsult eller vill bli en — börja här.',
+      cta: 'Kontakta oss',
+    },
+  },
   pages: {
     home: { h1: 'Start' },
     whatWeDo: { h1: 'Vad vi gör' },
