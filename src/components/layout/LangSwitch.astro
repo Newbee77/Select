@@ -1,0 +1,32 @@
+---
+import { altPath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/types';
+
+interface Props {
+  lang: Lang;
+  path: string;
+  class?: string;
+}
+
+const { lang, path, class: className }: Props = Astro.props;
+const svHref = altPath(path, 'sv');
+const enHref = altPath(path, 'en');
+
+const linkClasses =
+  'inline-flex min-h-11 min-w-11 items-center justify-center px-2 hover:text-amber-500 aria-[current=page]:text-amber-500';
+---
+
+<div
+  class:list={[
+    'flex items-center text-small font-semibold tracking-wide text-ink-300',
+    className,
+  ]}
+>
+  <a href={svHref} aria-current={lang === 'sv' ? 'page' : undefined} class={linkClasses}>
+    SV
+  </a>
+  <span class="mx-0.5 text-ink-600" aria-hidden="true">|</span>
+  <a href={enHref} aria-current={lang === 'en' ? 'page' : undefined} class={linkClasses}>
+    EN
+  </a>
+</div>

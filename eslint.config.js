@@ -1,0 +1,17 @@
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import astro from 'eslint-plugin-astro';
+
+export default defineConfig(
+  {
+    ignores: ['dist/**', '.astro/**', 'node_modules/**', 'public/**'],
+  },
+  tseslint.configs.recommended,
+  astro.configs['flat/recommended'],
+  astro.configs['flat/jsx-a11y-recommended'],
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    },
+  },
+);

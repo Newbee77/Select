@@ -1,0 +1,104 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { site } from '../../config/site';
+import type { Dict, Lang } from '../../i18n/types';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  dict: Dict;
+  navItems: NavItem[];
+  lang: Lang;
+  privacyHref: string;
+}
+
+const { dict, navItems, lang, privacyHref }: Props = Astro.props;
+const homeHref = lang === 'sv' ? '/' : '/en/';
+const year = new Date().getFullYear();
+const copyright = dict.footer.copyright
+  .replace('{year}', String(year))
+  .replace('{orgNr}', site.orgNr)
+  .replace('{registeredOffice}', site.registeredOffice);
+---
+
+<footer class="border-t border-ink-700 bg-ink-950 pb-8 pt-16 lg:pt-20">
+  <Container>
+    <div class="grid gap-10 md:grid-cols-[2fr_1fr_1fr_1.4fr]">
+      <div>
+        <a href={homeHref} class="mb-4 inline-flex">
+          <img
+            src="/images/logo.png"
+            alt={site.shortName}
+            width="112"
+            height="28"
+            class="h-7 w-auto"
+          />
+        </a>
+        <p class="max-w-[34ch] text-small text-ink-300">{dict.footer.tagline}</p>
+        <p class="mt-4">
+          <a href={`mailto:${site.email}`} class="text-small text-ink-300 hover:text-amber-500">
+            {site.email}
+          </a>
+        </p>
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-eyebrow uppercase text-ink-300">{dict.footer.siteHeading}</h4>
+        <ul class="grid gap-3">
+          {
+            navItems.map((item) => (
+              <li>
+                <a href={item.href} class="text-body text-ink-300 hover:text-amber-500">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-eyebrow uppercase text-ink-300">{dict.footer.followHeading}</h4>
+        <ul class="grid gap-3">
+          <li>
+            <a
+              href={site.linkedinUrl}
+              target="_blank"
+              rel="noopener"
+              class="text-body text-ink-300 hover:text-amber-500"
+            >
+              {dict.footer.linkedin}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-eyebrow uppercase text-ink-300">{dict.footer.employeesHeading}</h4>
+        <p class="mb-4 max-w-[34ch] text-small text-ink-300">{dict.footer.employeesText}</p>
+        <Button
+          href={site.sharepointUrl}
+          target="_blank"
+          rel="noopener"
+          variant="ghost-dark"
+          compact
+        >
+          {dict.footer.employeesCta}
+        </Button>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-wrap items-center justify-between gap-2 border-t border-ink-700 pt-6 text-small text-ink-400"
+    >
+      <span>{copyright}</span>
+      <a href={privacyHref} class="text-ink-400 hover:text-amber-500"
+        >{dict.footer.privacyLink}</a
+      >
+    </div>
+  </Container>
+</footer>

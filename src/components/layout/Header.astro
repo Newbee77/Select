@@ -1,0 +1,107 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import LangSwitch from './LangSwitch.astro';
+import { site } from '../../config/site';
+import type { Lang } from '../../i18n/types';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems: NavItem[];
+  employeesLabel: string;
+  openMenuLabel: string;
+  primaryNavLabel: string;
+  lang: Lang;
+  path: string;
+}
+
+const { navItems, employeesLabel, openMenuLabel, primaryNavLabel, lang, path }: Props =
+  Astro.props;
+const homeHref = lang === 'sv' ? '/' : '/en/';
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 h-[72px] border-b border-transparent bg-transparent transition-colors duration-200 ease-select"
+>
+  <Container class="flex h-full items-center justify-between">
+    <a href={homeHref} class="flex items-center">
+      <img
+        src="/images/logo.png"
+        alt={site.shortName}
+        width="128"
+        height="32"
+        class="h-8 w-auto"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label={primaryNavLabel}>
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="group relative py-1 text-body font-medium text-ink-200 hover:text-white"
+          >
+            {item.label}
+            <span
+              class="absolute inset-x-0 bottom-0 h-px w-0 bg-amber-500 transition-all duration-200 group-hover:w-full"
+              aria-hidden="true"
+            />
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-5">
+      <LangSwitch lang={lang} path={path} class="hidden lg:flex" />
+      <Button
+        href={site.sharepointUrl}
+        target="_blank"
+        rel="noopener"
+        variant="ghost-dark"
+        compact
+        class="hidden lg:inline-flex"
+      >
+        {employeesLabel}
+      </Button>
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center text-ink-100 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu-panel"
+        aria-label={openMenuLabel}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M3 6h18M3 12h18M3 18h18"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+  </Container>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+
+  if (header) {
+    const onScroll = () => {
+      const scrolled = window.scrollY > 40;
+      header.classList.toggle('bg-ink-950/92', scrolled);
+      header.classList.toggle('backdrop-blur-md', scrolled);
+      header.classList.toggle('border-ink-700', scrolled);
+      header.classList.toggle('bg-transparent', !scrolled);
+      header.classList.toggle('border-transparent', !scrolled);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
