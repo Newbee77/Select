@@ -1,0 +1,70 @@
+export type Lang = 'sv' | 'en';
+
+export interface NavDict {
+  whatWeDo: string;
+  joinUs: string;
+  about: string;
+  contact: string;
+  employees: string;
+  openMenu: string;
+  closeMenu: string;
+  menuLabel: string;
+  primaryNav: string;
+}
+
+export interface FooterDict {
+  tagline: string;
+  siteHeading: string;
+  followHeading: string;
+  linkedin: string;
+  employeesHeading: string;
+  employeesText: string;
+  employeesCta: string;
+  privacyLink: string;
+  /** Template with {year}, {orgNr} and {registeredOffice} placeholders. */
+  copyright: string;
+}
+
+export interface MetaEntry {
+  title: string;
+  description: string;
+}
+
+export interface MetaDict {
+  home: MetaEntry;
+  whatWeDo: MetaEntry;
+  joinUs: MetaEntry;
+  about: MetaEntry;
+  contact: MetaEntry;
+  privacy: MetaEntry;
+  notFound: MetaEntry;
+}
+
+export interface PagePlaceholder {
+  h1: string;
+}
+
+export interface NotFoundPage extends PagePlaceholder {
+  body: string;
+  backHome: string;
+}
+
+export interface PagesDict {
+  home: PagePlaceholder;
+  whatWeDo: PagePlaceholder;
+  joinUs: PagePlaceholder;
+  about: PagePlaceholder;
+  contact: PagePlaceholder;
+  privacy: PagePlaceholder;
+  notFound: NotFoundPage;
+}
+
+export interface Dict {
+  lang: Lang;
+  htmlLang: string;
+  skipLink: string;
+  nav: NavDict;
+  footer: FooterDict;
+  meta: MetaDict;
+  pages: PagesDict;
+}

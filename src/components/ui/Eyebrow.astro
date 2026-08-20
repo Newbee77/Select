@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** Use the darker gold tone for light (paper) backgrounds. */
+  light?: boolean;
+  class?: string;
+  as?: 'div' | 'p' | 'span';
+}
+
+const { light = false, class: className, as: Tag = 'div' }: Props = Astro.props;
+const toneClass = light ? 'text-amber-800' : 'text-amber-500';
+const lineClass = light ? 'bg-amber-800' : 'bg-amber-500';
+---
+
+<Tag class:list={['flex items-center gap-3 text-eyebrow uppercase', toneClass, className]}>
+  <span class:list={['h-px w-6 flex-none', lineClass]} aria-hidden="true"></span>
+  <slot />
+</Tag>

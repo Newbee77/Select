@@ -1,0 +1,52 @@
+---
+type Variant = 'primary' | 'dark' | 'ghost-dark' | 'ghost-light' | 'link';
+
+interface Props {
+  variant?: Variant;
+  compact?: boolean;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  compact = false,
+  href,
+  type = 'button',
+  class: className,
+  target,
+  rel,
+}: Props = Astro.props;
+
+const variantClasses: Record<Variant, string> = {
+  primary:
+    'bg-amber-500 text-ink-950 hover:bg-amber-400 hover:-translate-y-px border border-transparent',
+  dark: 'bg-ink-950 text-amber-500 hover:bg-ink-975 border border-transparent',
+  'ghost-dark':
+    'bg-transparent text-ink-100 border border-ink-600 hover:border-amber-500 hover:text-amber-500',
+  'ghost-light': 'bg-transparent text-ink-950 border border-ink-100 hover:border-ink-950',
+  link: 'bg-transparent p-0 border-0 text-amber-500 underline decoration-transparent underline-offset-4 hover:decoration-amber-500',
+};
+
+const sizeClasses = compact ? 'px-6 py-3 text-small' : 'px-7 py-3.5 text-button';
+
+const isLink = variant === 'link';
+const classes = [
+  isLink ? '' : 'rounded-control',
+  'inline-flex items-center gap-2 font-sans font-semibold transition duration-200 ease-select',
+  isLink ? 'text-button' : sizeClasses,
+  variantClasses[variant],
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element class={classes} href={href} type={href ? undefined : type} target={target} rel={rel}>
+  <slot />
+</Element>

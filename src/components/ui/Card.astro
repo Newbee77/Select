@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className }: Props = Astro.props;
+---
+
+<div
+  class:list={[
+    'rounded-card border border-ink-700 bg-ink-850 px-8 py-9 transition-[border-color,transform] duration-200 ease-select hover:-translate-y-0.5 hover:border-amber-500',
+    className,
+  ]}
+>
+  <div class="mb-5 font-voga text-[2.5rem] leading-none text-amber-500 empty:hidden">
+    <slot name="number" />
+  </div>
+  <slot />
+</div>

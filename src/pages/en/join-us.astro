@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import { en } from '../../i18n/en';
+---
+
+<BaseLayout title={en.meta.joinUs.title} description={en.meta.joinUs.description}>
+  <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
+    <Container>
+      <h1>{en.pages.joinUs.h1}</h1>
+    </Container>
+  </section>
+</BaseLayout>

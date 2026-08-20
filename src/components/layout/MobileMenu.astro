@@ -1,0 +1,129 @@
+---
+import LangSwitch from './LangSwitch.astro';
+import type { Lang } from '../../i18n/types';
+import { site } from '../../config/site';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems: NavItem[];
+  employeesLabel: string;
+  closeLabel: string;
+  menuLabel: string;
+  lang: Lang;
+  path: string;
+}
+
+const { navItems, employeesLabel, closeLabel, menuLabel, lang, path }: Props = Astro.props;
+---
+
+<div
+  id="mobile-menu-panel"
+  class="fixed inset-0 z-[60] hidden flex-col bg-ink-950 lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label={menuLabel}
+>
+  <div class="flex h-[72px] items-center justify-end px-6">
+    <button
+      id="mobile-menu-close"
+      type="button"
+      class="inline-flex min-h-11 min-w-11 items-center justify-center text-ink-100 hover:text-amber-500"
+      aria-label={closeLabel}
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M4 4l16 16M20 4L4 20"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"></path>
+      </svg>
+    </button>
+  </div>
+  <nav
+    class="flex flex-1 flex-col items-start justify-center gap-8 px-8"
+    aria-label={menuLabel}
+  >
+    {
+      navItems.map((item) => (
+        <a href={item.href} class="font-voga text-h1 text-white hover:text-amber-500">
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="flex flex-col gap-6 border-t border-ink-700 px-8 py-8">
+    <a
+      href={site.sharepointUrl}
+      target="_blank"
+      rel="noopener"
+      class="text-button font-semibold text-ink-100 hover:text-amber-500"
+    >
+      {employeesLabel}
+    </a>
+    <LangSwitch lang={lang} path={path} />
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('mobile-menu-panel');
+  const openButton = document.getElementById('mobile-menu-button');
+  const closeButton = document.getElementById('mobile-menu-close');
+
+  if (panel && openButton && closeButton) {
+    const focusableSelector = 'a[href], button:not([disabled])';
+    let lastFocused: HTMLElement | null = null;
+
+    const onKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        const focusables = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector));
+        if (focusables.length === 0) return;
+
+        const firstEl = focusables[0];
+        const lastEl = focusables[focusables.length - 1];
+        if (!firstEl || !lastEl) return;
+
+        if (event.shiftKey && document.activeElement === firstEl) {
+          event.preventDefault();
+          lastEl.focus();
+        } else if (!event.shiftKey && document.activeElement === lastEl) {
+          event.preventDefault();
+          firstEl.focus();
+        }
+      }
+    };
+
+    function open() {
+      if (!panel) return;
+      lastFocused = document.activeElement as HTMLElement | null;
+      panel.classList.remove('hidden');
+      panel.classList.add('flex');
+      document.documentElement.style.overflow = 'hidden';
+      openButton?.setAttribute('aria-expanded', 'true');
+      panel.querySelector<HTMLElement>(focusableSelector)?.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+
+    function close() {
+      if (!panel) return;
+      panel.classList.add('hidden');
+      panel.classList.remove('flex');
+      document.documentElement.style.overflow = '';
+      openButton?.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', onKeydown);
+      (lastFocused ?? openButton)?.focus();
+    }
+
+    openButton.addEventListener('click', open);
+    closeButton.addEventListener('click', close);
+  }
+</script>

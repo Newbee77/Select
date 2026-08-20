@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.ts';
+
+@import '@fontsource-variable/inter';
+
+@font-face {
+  font-family: 'Voga';
+  src: url('/fonts/Voga-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-ink-200 font-sans text-body antialiased;
+  }
+
+  h1 {
+    @apply font-voga text-h1 text-white;
+  }
+
+  h2 {
+    @apply font-voga text-h2 text-white;
+  }
+
+  h3 {
+    @apply font-sans text-h3 text-white;
+  }
+
+  p {
+    @apply max-w-prose;
+  }
+
+  a {
+    @apply text-amber-500;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.amber-500');
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
