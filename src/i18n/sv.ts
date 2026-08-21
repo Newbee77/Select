@@ -269,4 +269,204 @@ export const sv: Dict = {
       ],
     },
   },
+  contact: {
+    heading: 'Hör av dig',
+    lead: 'Vi svarar inom ett dygn, vardagar. Ofta snabbare.',
+    details: [
+      {
+        label: 'Var vi finns',
+        value: 'Vi har inget kontor att bjuda in dig till. Vi kommer dit ni är.',
+      },
+      {
+        label: 'Räckvidd',
+        value: 'Vi utgår från Skåne och tar uppdrag i södra Sverige och Köpenhamn.',
+      },
+      { label: 'E-post', value: '{email}', note: 'Gäller även jobbansökningar.' },
+      { label: 'LinkedIn', value: '{linkedin}' },
+      { label: 'Bolag', value: '{name} · Org.nr {orgNr} · Säte: {registeredOffice}' },
+    ],
+    form: {
+      title: 'Skicka ett meddelande',
+      name: 'Namn',
+      email: 'E-post',
+      role: 'Jag är',
+      rolePlaceholder: 'Välj ett alternativ',
+      roleOptions: [
+        { value: 'kund', label: 'Kund' },
+        { value: 'konsult', label: 'Konsult' },
+        { value: 'annat', label: 'Annat' },
+      ],
+      message: 'Meddelande',
+      submit: 'Skicka',
+      sending: 'Skickar…',
+      consent: 'Jag godkänner att mina uppgifter behandlas enligt {link}.',
+      consentLinkLabel: 'integritetspolicyn',
+      honeypot: 'Lämna det här fältet tomt',
+      success: 'Tack! Vi hör av oss inom ett dygn.',
+      failure: 'Meddelandet kunde inte skickas. Mejla oss på {email} i stället.',
+      errors: {
+        name: 'Fyll i ditt namn.',
+        email: 'Fyll i din e-postadress.',
+        emailFormat: 'Kontrollera e-postadressen.',
+        message: 'Skriv ett meddelande.',
+        consent: 'Du behöver godkänna behandlingen av dina uppgifter.',
+      },
+    },
+  },
+  privacy: {
+    heading: 'Integritetspolicy',
+    lastUpdatedLabel: 'Senast uppdaterad',
+    // TODO (Johan): fyll i publiceringsdatumet här när policyn är granskad och publicerad.
+    lastUpdated: '(fylls i vid publicering)',
+    sections: [
+      {
+        heading: 'Personuppgiftsansvarig',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: '{name}, org.nr {orgNr}, med säte i {registeredOffice}, är personuppgiftsansvarig för behandlingen av personuppgifter på selectsociety.se.',
+          },
+          { kind: 'paragraph', text: 'Kontakt i integritetsfrågor: {email}' },
+        ],
+      },
+      {
+        heading: 'Vilka uppgifter vi samlar in',
+        blocks: [
+          { kind: 'paragraph', text: 'Vi samlar bara in uppgifter du själv lämnar till oss.' },
+          {
+            kind: 'paragraph',
+            lead: 'Via kontaktformuläret:',
+            text: 'namn, e-postadress, vilken kategori du anger (kund, konsult eller annat) och innehållet i ditt meddelande.',
+          },
+          {
+            kind: 'paragraph',
+            lead: 'Om du mejlar oss direkt:',
+            text: 'de uppgifter som finns i ditt mejl.',
+          },
+          {
+            kind: 'paragraph',
+            lead: 'Vi använder inga kakor och ingen besöksstatistik.',
+            text: 'Vi mäter inte hur du rör dig på sajten, och vi delar inga uppgifter med annonsnätverk.',
+          },
+          // TODO (Johan): lägg till ett stycke om serverloggar när hosting är vald.
+          // IP-adresser i åtkomstloggar är personuppgifter och måste beskrivas här.
+        ],
+      },
+      {
+        heading: 'Ändamål och laglig grund',
+        blocks: [
+          {
+            kind: 'table',
+            headers: ['Vad vi gör', 'Varför', 'Laglig grund'],
+            rows: [
+              [
+                'Besvarar din förfrågan',
+                'Du har kontaktat oss och vill ha svar',
+                'Berättigat intresse (art. 6.1 f)',
+              ],
+              [
+                'Behandlar din jobbansökan',
+                'Du söker arbete hos oss',
+                'Berättigat intresse och åtgärder inför avtal (art. 6.1 b och f)',
+              ],
+              [
+                'Sparar affärskorrespondens',
+                'Vi behöver kunna följa upp överenskommelser',
+                'Berättigat intresse (art. 6.1 f)',
+              ],
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Hur länge vi sparar uppgifterna',
+        // TODO (Johan): bekräfta lagringstiderna nedan — de är förslag, inte beslut.
+        blocks: [
+          {
+            kind: 'list',
+            items: [
+              'Allmänna förfrågningar: raderas senast tolv månader efter att ärendet avslutats.',
+              'Jobbansökningar: sparas i tolv månader efter att rekryteringen avslutats, om du inte samtycker till längre lagring.',
+              'Uppgifter i affärsrelationer: sparas så länge relationen pågår och därefter enligt bokföringslagen, sju år.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Vem som får ta del av uppgifterna',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'Vi säljer aldrig dina uppgifter och delar dem inte för marknadsföringsändamål.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'Uppgifterna hanteras av oss själva och av de leverantörer som driver våra system:',
+          },
+          {
+            kind: 'list',
+            items: [
+              'Formspree — tar emot och vidarebefordrar kontaktformuläret',
+              // TODO (Johan): bekräfta att bolaget kör Microsoft 365 innan detta publiceras.
+              'Microsoft — e-post och dokumenthantering',
+              // TODO (Johan): lägg till hostingleverantören i listan när den är vald.
+            ],
+          },
+          {
+            kind: 'paragraph',
+            text: 'Samtliga är personuppgiftsbiträden och behandlar uppgifterna enligt biträdesavtal och endast på våra instruktioner.',
+          },
+          // TODO (Johan): om Formspree behandlar uppgifter utanför EU/EES — beskriv
+          // överföringsmekanismen (EU–US Data Privacy Framework eller standardavtals-
+          // klausuler) i ett eget stycke här. Kontrollera även att DPA är påskrivet.
+        ],
+      },
+      {
+        heading: 'Dina rättigheter',
+        blocks: [
+          { kind: 'paragraph', text: 'Du har rätt att:' },
+          {
+            kind: 'list',
+            items: [
+              'få veta vilka uppgifter vi har om dig och få en kopia av dem',
+              'få felaktiga uppgifter rättade',
+              'få dina uppgifter raderade',
+              'invända mot vår behandling eller begära att den begränsas',
+              'få ut dina uppgifter i ett maskinläsbart format',
+            ],
+          },
+          {
+            kind: 'paragraph',
+            text: 'Hör av dig till {email} så hjälper vi dig. Vi svarar inom en månad.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'Om du tycker att vi hanterar dina uppgifter felaktigt har du rätt att klaga hos Integritetsskyddsmyndigheten (IMY), imy.se.',
+          },
+        ],
+      },
+      {
+        heading: 'Kakor',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'selectsociety.se använder inga kakor. Vi laddar heller inga typsnitt, kartor eller videospelare från tredje part, så inga uppgifter om ditt besök lämnar sajten.',
+          },
+        ],
+      },
+      {
+        heading: 'Ändringar i denna policy',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'Om vi ändrar hur vi behandlar personuppgifter uppdaterar vi den här sidan och ändrar datumet överst.',
+          },
+        ],
+      },
+      {
+        heading: 'Kontakt',
+        blocks: [{ kind: 'contact' }],
+      },
+    ],
+  },
 };

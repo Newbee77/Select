@@ -184,6 +184,70 @@ export interface AboutDict {
   };
 }
 
+export interface ContactDetail {
+  label: string;
+  /** Rendered as-is. Values that live in site.ts are interpolated by the page. */
+  value: string;
+  note?: string;
+}
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+export interface ContactFormDict {
+  title: string;
+  name: string;
+  email: string;
+  role: string;
+  rolePlaceholder: string;
+  roleOptions: SelectOption[];
+  message: string;
+  submit: string;
+  sending: string;
+  /** Template with a {link} placeholder for the privacy policy link. */
+  consent: string;
+  consentLinkLabel: string;
+  /** Honeypot label — visually hidden, read by bots only. */
+  honeypot: string;
+  success: string;
+  failure: string;
+  errors: {
+    name: string;
+    email: string;
+    emailFormat: string;
+    message: string;
+    consent: string;
+  };
+}
+
+export interface ContactDict {
+  heading: string;
+  lead: string;
+  /** Templates may contain {name}, {orgNr} and {registeredOffice}. */
+  details: ContactDetail[];
+  form: ContactFormDict;
+}
+
+export type PrivacyBlock =
+  | { kind: 'paragraph'; lead?: string; text: string }
+  | { kind: 'list'; items: string[] }
+  | { kind: 'table'; headers: string[]; rows: string[][] }
+  | { kind: 'contact' };
+
+export interface PrivacySection {
+  heading: string;
+  blocks: PrivacyBlock[];
+}
+
+export interface PrivacyDict {
+  heading: string;
+  lastUpdatedLabel: string;
+  lastUpdated: string;
+  sections: PrivacySection[];
+}
+
 export interface Dict {
   lang: Lang;
   htmlLang: string;
@@ -196,4 +260,6 @@ export interface Dict {
   services: ServicesDict;
   careers: CareersDict;
   about: AboutDict;
+  contact: ContactDict;
+  privacy: PrivacyDict;
 }

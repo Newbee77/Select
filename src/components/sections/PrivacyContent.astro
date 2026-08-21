@@ -1,0 +1,102 @@
+---
+import Container from '../ui/Container.astro';
+import { site } from '../../config/site';
+import { interpolate, siteTokens } from '../../i18n/utils';
+import type { Lang, PrivacyDict } from '../../i18n/types';
+
+interface Props {
+  privacy: PrivacyDict;
+  lang: Lang;
+}
+
+const { privacy, lang }: Props = Astro.props;
+const tx = (text: string) => interpolate(text, siteTokens);
+---
+
+<section class="bg-ink-950 py-24 md:py-32 lg:py-40">
+  <Container>
+    <div class="max-w-narrow">
+      <h1>{privacy.heading}</h1>
+      <p class="mt-4 text-small text-ink-400">
+        {privacy.lastUpdatedLabel}: {privacy.lastUpdated}
+      </p>
+
+      <div class="mt-16 grid gap-14">
+        {
+          privacy.sections.map((section) => (
+            <section>
+              <h2 class="font-sans text-h3">{section.heading}</h2>
+              <div class="mt-4 grid gap-4">
+                {section.blocks.map((block) => {
+                  if (block.kind === 'paragraph') {
+                    return (
+                      <p class="max-w-prose text-body text-ink-300">
+                        {block.lead && <strong class="text-ink-100">{tx(block.lead)} </strong>}
+                        {tx(block.text)}
+                      </p>
+                    );
+                  }
+
+                  if (block.kind === 'list') {
+                    return (
+                      <ul class="grid max-w-prose list-disc gap-2 pl-5 text-body text-ink-300">
+                        {block.items.map((item) => (
+                          <li>{tx(item)}</li>
+                        ))}
+                      </ul>
+                    );
+                  }
+
+                  if (block.kind === 'table') {
+                    return (
+                      <div class="overflow-x-auto">
+                        <table class="w-full max-w-prose border-collapse text-left text-small">
+                          <thead>
+                            <tr>
+                              {block.headers.map((header) => (
+                                <th class="border-b border-ink-700 py-3 pr-4 text-eyebrow uppercase text-ink-400">
+                                  {header}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {block.rows.map((row) => (
+                              <tr>
+                                {row.map((cell) => (
+                                  <td class="border-b border-ink-800 py-3 pr-4 align-top text-ink-300">
+                                    {tx(cell)}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <address class="max-w-prose text-body not-italic text-ink-300">
+                      {site.name}
+                      <br />
+                      Org.nr {site.orgNr}
+                      <br />
+                      {lang === 'sv'
+                        ? `Säte: ${site.registeredOffice}`
+                        : `Registered office: ${site.registeredOffice}, Sweden`}
+                      <br />
+                      <a href={`mailto:${site.email}`} class="text-amber-500">
+                        {site.email}
+                      </a>
+                    </address>
+                  );
+                })}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

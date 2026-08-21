@@ -14,7 +14,11 @@ import grassImage from '../assets/images/thegrassisgreener.jpeg';
 const home = sv.home;
 ---
 
-<BaseLayout title={sv.meta.home.title} description={sv.meta.home.description}>
+<BaseLayout
+  title={sv.meta.home.title}
+  description={sv.meta.home.description}
+  organizationSchema
+>
   <Hero
     eyebrow={home.hero.eyebrow}
     heading={home.hero.heading}
