@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
+import ContactForm from '../../components/sections/ContactForm.astro';
 import { en } from '../../i18n/en';
+import { PAGE_MAP } from '../../i18n/utils';
 ---
 
 <BaseLayout title={en.meta.contact.title} description={en.meta.contact.description}>
-  <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
-    <Container>
-      <h1>{en.pages.contact.h1}</h1>
-    </Container>
-  </section>
+  <ContactForm contact={en.contact} privacyHref={PAGE_MAP[5].en} />
 </BaseLayout>

@@ -270,4 +270,208 @@ export const en: Dict = {
       ],
     },
   },
+  contact: {
+    heading: 'Get in touch',
+    lead: 'We reply within one business day. Usually faster.',
+    details: [
+      {
+        label: 'Where we are',
+        value: "We don't have an office to invite you to. We come to where you are.",
+      },
+      {
+        label: 'Reach',
+        value:
+          "We're based in Skåne and take assignments across southern Sweden and Copenhagen.",
+      },
+      { label: 'Email', value: '{email}', note: 'Also for job applications.' },
+      { label: 'LinkedIn', value: '{linkedin}' },
+      {
+        label: 'Company',
+        value: '{name} · Reg. no. {orgNr} · Registered office: {registeredOffice}, Sweden',
+      },
+    ],
+    form: {
+      title: 'Send a message',
+      name: 'Name',
+      email: 'Email',
+      role: 'I am a',
+      rolePlaceholder: 'Choose an option',
+      roleOptions: [
+        { value: 'kund', label: 'Client' },
+        { value: 'konsult', label: 'Consultant' },
+        { value: 'annat', label: 'Other' },
+      ],
+      message: 'Message',
+      submit: 'Send',
+      sending: 'Sending…',
+      consent: 'I agree that my details are processed in accordance with the {link}.',
+      consentLinkLabel: 'privacy policy',
+      honeypot: 'Leave this field empty',
+      success: "Thanks! We'll be in touch within a business day.",
+      failure: 'The message could not be sent. Please email us at {email} instead.',
+      errors: {
+        name: 'Please enter your name.',
+        email: 'Please enter your email address.',
+        emailFormat: 'Please check the email address.',
+        message: 'Please write a message.',
+        consent: 'You need to agree to the processing of your details.',
+      },
+    },
+  },
+  privacy: {
+    heading: 'Privacy policy',
+    lastUpdatedLabel: 'Last updated',
+    // TODO (Johan): fill in the publication date here once the policy is reviewed and published.
+    lastUpdated: '(to be filled in at publication)',
+    sections: [
+      {
+        heading: 'Data controller',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: '{name}, reg. no. {orgNr}, with its registered office in {registeredOffice}, Sweden, is the controller for the processing of personal data on selectsociety.se.',
+          },
+          { kind: 'paragraph', text: 'Contact for privacy matters: {email}' },
+        ],
+      },
+      {
+        heading: 'What data we collect',
+        blocks: [
+          { kind: 'paragraph', text: 'We only collect data you give us yourself.' },
+          {
+            kind: 'paragraph',
+            lead: 'Via the contact form:',
+            text: 'your name, email address, the category you select (client, consultant or other) and the contents of your message.',
+          },
+          {
+            kind: 'paragraph',
+            lead: 'If you email us directly:',
+            text: 'the data contained in your email.',
+          },
+          {
+            kind: 'paragraph',
+            lead: 'We use no cookies and no visitor analytics.',
+            text: "We don't measure how you move around the site, and we share no data with ad networks.",
+          },
+          // TODO (Johan): add a paragraph about server logs once hosting is chosen.
+          // IP addresses in access logs are personal data and must be described here.
+        ],
+      },
+      {
+        heading: 'Purposes and legal basis',
+        blocks: [
+          {
+            kind: 'table',
+            headers: ['What we do', 'Why', 'Legal basis'],
+            rows: [
+              [
+                'Answer your enquiry',
+                'You contacted us and want a reply',
+                'Legitimate interest (Article 6(1)(f) GDPR)',
+              ],
+              [
+                'Process your job application',
+                'You are applying for work with us',
+                'Legitimate interest and steps prior to a contract (Article 6(1)(b) and (f) GDPR)',
+              ],
+              [
+                'Keep business correspondence',
+                'We need to be able to follow up on agreements',
+                'Legitimate interest (Article 6(1)(f) GDPR)',
+              ],
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'How long we keep the data',
+        // TODO (Johan): confirm the retention periods below — they are proposals, not decisions.
+        blocks: [
+          {
+            kind: 'list',
+            items: [
+              'General enquiries: deleted no later than twelve months after the matter is closed.',
+              'Job applications: kept for twelve months after the recruitment is closed, unless you consent to longer storage.',
+              'Data in business relationships: kept for as long as the relationship lasts and thereafter for seven years under the Swedish Accounting Act.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Who has access to the data',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'We never sell your data and we do not share it for marketing purposes.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'The data is handled by us and by the suppliers that run our systems:',
+          },
+          {
+            kind: 'list',
+            items: [
+              'Formspree — receives and forwards the contact form',
+              // TODO (Johan): confirm that the company runs Microsoft 365 before this is published.
+              'Microsoft — email and document management',
+              // TODO (Johan): add the hosting provider to this list once it is chosen.
+            ],
+          },
+          {
+            kind: 'paragraph',
+            text: 'All of them are processors and handle the data under a data processing agreement and only on our instructions.',
+          },
+          // TODO (Johan): if Formspree processes data outside the EU/EEA — describe the
+          // transfer mechanism (EU–US Data Privacy Framework or standard contractual
+          // clauses) in its own paragraph here. Also confirm the DPA is signed.
+        ],
+      },
+      {
+        heading: 'Your rights',
+        blocks: [
+          { kind: 'paragraph', text: 'You have the right to:' },
+          {
+            kind: 'list',
+            items: [
+              'know what data we hold about you and receive a copy of it',
+              'have incorrect data corrected',
+              'have your data erased',
+              'object to our processing or request that it be restricted',
+              'receive your data in a machine-readable format',
+            ],
+          },
+          {
+            kind: 'paragraph',
+            text: 'Get in touch at {email} and we will help you. We reply within one month.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'If you believe we handle your data incorrectly, you have the right to complain to the Swedish Authority for Privacy Protection (IMY), imy.se.',
+          },
+        ],
+      },
+      {
+        heading: 'Cookies',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'selectsociety.se uses no cookies. We also load no fonts, maps or video players from third parties, so no data about your visit leaves the site.',
+          },
+        ],
+      },
+      {
+        heading: 'Changes to this policy',
+        blocks: [
+          {
+            kind: 'paragraph',
+            text: 'If we change how we process personal data, we update this page and change the date at the top.',
+          },
+        ],
+      },
+      {
+        heading: 'Contact',
+        blocks: [{ kind: 'contact' }],
+      },
+    ],
+  },
 };

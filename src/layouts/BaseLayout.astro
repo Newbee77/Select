@@ -4,14 +4,19 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import MobileMenu from '../components/layout/MobileMenu.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
-import { getLang, t, PAGE_MAP } from '../i18n/utils';
+import { getLang, t, PAGE_MAP, findPageEntry, withTrailingSlash } from '../i18n/utils';
+import { site } from '../config/site';
 
 interface Props {
   title: string;
   description: string;
+  /** Set on 404 pages: excludes the page from indexing, sitemap and hreflang. */
+  noindex?: boolean;
+  /** Set on the home pages only: adds the Organization JSON-LD block. */
+  organizationSchema?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false, organizationSchema = false } = Astro.props;
 const lang = getLang(Astro.url);
 const dict = t(lang);
 const path = Astro.url.pathname;
@@ -24,6 +29,25 @@ const navItems = [
 ];
 
 const privacyHref = lang === 'sv' ? PAGE_MAP[5].sv : PAGE_MAP[5].en;
+
+const canonicalUrl = new URL(path, site.baseUrl).toString();
+const ogImageUrl = new URL('/og-image.png', site.baseUrl).toString();
+const ogLocale = lang === 'sv' ? 'sv_SE' : 'en_GB';
+
+// Only the twelve real content routes get hreflang — a 404 has no translation
+// to point to, so `pageEntry` stays undefined there and the block is skipped.
+const pageEntry = noindex ? undefined : findPageEntry(path);
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.baseUrl,
+  logo: new URL('/images/logo.png', site.baseUrl).toString(),
+  email: site.email,
+  sameAs: [site.linkedinUrl],
+};
 ---
 
 <!doctype html>
@@ -38,9 +62,63 @@ const privacyHref = lang === 'sv' ? PAGE_MAP[5].sv : PAGE_MAP[5].en;
       type="font/woff2"
       crossorigin
     />
-    <link rel="icon" href="/images/RavenFav.png" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {noindex && <meta name="robots" content="noindex" />}
+
+    {
+      pageEntry && (
+        <>
+          <link
+            rel="alternate"
+            hreflang="sv"
+            href={new URL(withTrailingSlash(pageEntry.sv), site.baseUrl).toString()}
+          />
+          <link
+            rel="alternate"
+            hreflang="en"
+            href={new URL(withTrailingSlash(pageEntry.en), site.baseUrl).toString()}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(withTrailingSlash(pageEntry.sv), site.baseUrl).toString()}
+          />
+        </>
+      )
+    }
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content={site.shortName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {
+      organizationSchema && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(organizationJsonLd)}
+          is:inline
+        />
+      )
+    }
   </head>
   <body>
     <SkipLink label={dict.skipLink} />

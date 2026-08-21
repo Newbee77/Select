@@ -1,0 +1,309 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { site } from '../../config/site';
+import { interpolate, siteTokens } from '../../i18n/utils';
+import type { ContactDict } from '../../i18n/types';
+
+interface Props {
+  contact: ContactDict;
+  privacyHref: string;
+}
+
+const { contact, privacyHref }: Props = Astro.props;
+const form = contact.form;
+
+const hrefFor = (raw: string): string | undefined => {
+  if (raw === '{email}') return `mailto:${site.email}`;
+  if (raw === '{linkedin}') return site.linkedinUrl;
+  return undefined;
+};
+
+const [consentBefore, consentAfter] = form.consent.split('{link}');
+
+const fieldClass =
+  'w-full rounded-control border border-ink-700 bg-ink-800 px-4 py-3 text-body text-ink-100 transition-colors duration-200 ease-select hover:border-ink-600 aria-[invalid=true]:border-amber-500';
+const labelClass = 'mb-2 block text-small font-semibold text-ink-200';
+const errorClass = 'mt-2 hidden text-small text-amber-500';
+const valueLinkClass =
+  'text-ink-300 underline decoration-ink-600 underline-offset-4 transition-colors duration-200 ease-select hover:text-amber-500 hover:decoration-amber-500';
+---
+
+<section class="bg-ink-950 py-24 md:py-28 lg:py-32">
+  <Container>
+    <div class="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <h1 class="text-balance">{contact.heading}</h1>
+        <p class="mt-6 max-w-lead text-lead text-ink-300">{contact.lead}</p>
+
+        <dl class="mt-12 grid gap-8">
+          {
+            contact.details.map((detail) => {
+              const href = hrefFor(detail.value);
+              const value = interpolate(detail.value, siteTokens);
+              const external = href?.startsWith('http') ?? false;
+              return (
+                <div>
+                  <dt class="text-eyebrow uppercase text-amber-500">{detail.label}</dt>
+                  <dd class="mt-2 max-w-prose text-body text-ink-300">
+                    {href ? (
+                      <a
+                        href={href}
+                        class={valueLinkClass}
+                        target={external ? '_blank' : undefined}
+                        rel={external ? 'noopener' : undefined}
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      value
+                    )}
+                    {detail.note && (
+                      <span class="mt-1 block text-small text-ink-400">{detail.note}</span>
+                    )}
+                  </dd>
+                </div>
+              );
+            })
+          }
+        </dl>
+      </div>
+
+      <div class="rounded-card border border-ink-700 bg-ink-850 p-6 sm:p-8 lg:p-10">
+        <h2 class="font-sans text-h3">{form.title}</h2>
+
+        {
+          /* TODO (Johan): site.formEndpoint pekar fortfarande på .../f/TODO. Byt till det
+             riktiga Formspree-formuläret (aktivera gärna deras EU-läge) innan lansering. */
+        }
+        <form
+          class="mt-8 grid gap-6"
+          action={site.formEndpoint}
+          method="POST"
+          data-contact-form
+        >
+          <div>
+            <label class={labelClass} for="contact-name">{form.name}</label>
+            <input
+              class={fieldClass}
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              aria-describedby="contact-name-error"
+            />
+            <p class={errorClass} id="contact-name-error" data-error-for="name"></p>
+          </div>
+
+          <div>
+            <label class={labelClass} for="contact-email">{form.email}</label>
+            <input
+              class={fieldClass}
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              aria-describedby="contact-email-error"
+            />
+            <p class={errorClass} id="contact-email-error" data-error-for="email"></p>
+          </div>
+
+          <div>
+            <label class={labelClass} for="contact-role">{form.role}</label>
+            <select class={fieldClass} id="contact-role" name="role">
+              <option value="">{form.rolePlaceholder}</option>
+              {
+                form.roleOptions.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))
+              }
+            </select>
+          </div>
+
+          <div>
+            <label class={labelClass} for="contact-message">{form.message}</label>
+            <textarea
+              class={`${fieldClass} min-h-36 resize-y`}
+              id="contact-message"
+              name="message"
+              rows="6"
+              required
+              aria-describedby="contact-message-error"></textarea>
+            <p class={errorClass} id="contact-message-error" data-error-for="message"></p>
+          </div>
+
+          {
+            /* Honeypot. _gotcha is Formspree's own spam trap: hidden from people,
+               left in the DOM for bots that fill in everything they find. */
+          }
+          <div class="absolute h-px w-px overflow-hidden" aria-hidden="true">
+            <label for="contact-gotcha">{form.honeypot}</label>
+            <input
+              id="contact-gotcha"
+              name="_gotcha"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div>
+            <div class="flex items-start gap-3">
+              <input
+                class="mt-1 h-5 w-5 flex-none rounded-control border border-ink-700 bg-ink-800 accent-amber-500"
+                id="contact-consent"
+                name="consent"
+                type="checkbox"
+                value="yes"
+                required
+                aria-describedby="contact-consent-error"
+              />
+              <label class="text-small text-ink-300" for="contact-consent">
+                {consentBefore}<a
+                  href={privacyHref}
+                  class="text-amber-500 underline underline-offset-4">{form.consentLinkLabel}</a
+                >{consentAfter}
+              </label>
+            </div>
+            <p class={errorClass} id="contact-consent-error" data-error-for="consent"></p>
+          </div>
+
+          <div>
+            <Button type="submit" class="w-full justify-center sm:w-auto">{form.submit}</Button>
+          </div>
+
+          <p
+            class="hidden text-body text-amber-500"
+            data-form-status
+            role="status"
+            aria-live="polite"
+          >
+          </p>
+
+          {/* Message texts live here so the script never carries hardcoded copy. */}
+          <template data-msg="name">{form.errors.name}</template>
+          <template data-msg="email">{form.errors.email}</template>
+          <template data-msg="email-format">{form.errors.emailFormat}</template>
+          <template data-msg="message">{form.errors.message}</template>
+          <template data-msg="consent">{form.errors.consent}</template>
+          <template data-msg="sending">{form.sending}</template>
+          <template data-msg="success">{form.success}</template>
+          <template data-msg="failure">{interpolate(form.failure, siteTokens)}</template>
+        </form>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+
+  if (form) {
+    // Native validation (required, type="email") is the no-JS first line of defence.
+    // Now that JS is running we can do better, so take the messaging over ourselves.
+    form.noValidate = true;
+
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const submitLabel = (submitButton.textContent ?? '').trim();
+
+    const msg = (key: string) =>
+      form.querySelector<HTMLTemplateElement>(`[data-msg="${key}"]`)?.innerHTML.trim() ?? '';
+
+    const showStatus = (message: string) => {
+      status.textContent = message;
+      status.classList.remove('hidden');
+    };
+
+    const setError = (field: HTMLElement, name: string, message?: string) => {
+      const target = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      if (!target) return;
+
+      if (message) {
+        target.textContent = message;
+        target.classList.remove('hidden');
+        field.setAttribute('aria-invalid', 'true');
+      } else {
+        target.textContent = '';
+        target.classList.add('hidden');
+        field.removeAttribute('aria-invalid');
+      }
+    };
+
+    const fields = ['name', 'email', 'message', 'consent'].map((name) => ({
+      name,
+      el: form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement,
+    }));
+
+    const validateField = (
+      name: string,
+      el: HTMLInputElement | HTMLTextAreaElement,
+    ): boolean => {
+      if (name === 'consent') {
+        const ok = (el as HTMLInputElement).checked;
+        setError(el, name, ok ? undefined : msg('consent'));
+        return ok;
+      }
+
+      if (!el.value.trim()) {
+        setError(el, name, msg(name));
+        return false;
+      }
+
+      if (name === 'email' && !el.validity.valid) {
+        setError(el, name, msg('email-format'));
+        return false;
+      }
+
+      setError(el, name, undefined);
+      return true;
+    };
+
+    fields.forEach(({ name, el }) => {
+      el.addEventListener('blur', () => validateField(name, el));
+      el.addEventListener('input', () => {
+        if (el.hasAttribute('aria-invalid')) validateField(name, el);
+      });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      let firstInvalid: HTMLInputElement | HTMLTextAreaElement | undefined;
+      for (const { name, el } of fields) {
+        if (!validateField(name, el)) {
+          firstInvalid ??= el;
+        }
+      }
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = msg('sending');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(String(response.status));
+
+        form.reset();
+        fields.forEach(({ name, el }) => setError(el, name, undefined));
+        showStatus(msg('success'));
+      } catch {
+        showStatus(msg('failure'));
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = submitLabel;
+      }
+    });
+  }
+</script>
