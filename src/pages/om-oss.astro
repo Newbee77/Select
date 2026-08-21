@@ -1,13 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import ValueList from '../components/sections/ValueList.astro';
+import TeamGrid from '../components/sections/TeamGrid.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
 import Container from '../components/ui/Container.astro';
+import Reveal from '../components/ui/Reveal.astro';
 import { sv } from '../i18n/sv';
+
+const about = sv.about;
 ---
 
 <BaseLayout title={sv.meta.about.title} description={sv.meta.about.description}>
+  <PageHero eyebrow={about.hero.eyebrow} heading={about.hero.heading} lead={about.hero.lead} />
+
   <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
     <Container>
-      <h1>{sv.pages.about.h1}</h1>
+      <Reveal class="max-w-narrow">
+        {
+          about.story.paragraphs.map((paragraph) => (
+            <p class="mt-4 max-w-prose text-body text-ink-300 first:mt-0">{paragraph}</p>
+          ))
+        }
+      </Reveal>
     </Container>
   </section>
+
+  <ValueList values={about.values.items} />
+
+  <TeamGrid members={about.team.members} />
+
+  <CtaBand
+    heading={sv.home.ctaBand.heading}
+    text={sv.home.ctaBand.text}
+    ctaLabel={sv.home.ctaBand.cta}
+    ctaHref="/kontakt"
+  />
 </BaseLayout>

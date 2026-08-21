@@ -1,0 +1,54 @@
+---
+// TODO: Johan levererar teamfoton, namn och roller. Ersätt platshållarrutorna
+// nedan med riktiga <Image>-porträtt (kvadratisk beskärning) när materialet finns.
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Reveal from '../ui/Reveal.astro';
+
+interface Member {
+  name: string;
+  role: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  members: Member[];
+}
+
+const { eyebrow, heading, members }: Props = Astro.props;
+const hasHeading = Boolean(eyebrow || heading);
+---
+
+<section class="bg-paper py-24 md:py-32 lg:py-40">
+  <Container>
+    {
+      hasHeading && (
+        <Reveal>
+          <SectionHeading eyebrow={eyebrow} light>
+            {heading}
+          </SectionHeading>
+        </Reveal>
+      )
+    }
+    <div
+      class:list={['grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3', hasHeading && 'mt-16']}
+    >
+      {
+        members.map((member, index) => (
+          <Reveal>
+            <div class="group">
+              <div class="flex aspect-square items-center justify-center rounded-card border border-ink-700 bg-ink-800 transition-colors duration-200 ease-select group-hover:border-amber-500">
+                <span class="font-voga text-[1.5rem] text-ink-400 transition-colors duration-200 ease-select group-hover:text-amber-500">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
+              <p class="mt-4 text-h3 text-ink-950">{member.name}</p>
+              <p class="text-small text-ink-500">{member.role}</p>
+            </div>
+          </Reveal>
+        ))
+      }
+    </div>
+  </Container>
+</section>
