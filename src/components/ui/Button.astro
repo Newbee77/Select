@@ -4,6 +4,8 @@ type Variant = 'primary' | 'dark' | 'ghost-dark' | 'ghost-light' | 'link';
 interface Props {
   variant?: Variant;
   compact?: boolean;
+  /** For variant="link": use the darker gold tone for light (paper) backgrounds. */
+  light?: boolean;
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   class?: string;
@@ -14,6 +16,7 @@ interface Props {
 const {
   variant = 'primary',
   compact = false,
+  light = false,
   href,
   type = 'button',
   class: className,
@@ -28,14 +31,16 @@ const variantClasses: Record<Variant, string> = {
   'ghost-dark':
     'bg-transparent text-ink-100 border border-ink-600 hover:border-amber-500 hover:text-amber-500',
   'ghost-light': 'bg-transparent text-ink-950 border border-ink-100 hover:border-ink-950',
-  link: 'bg-transparent p-0 border-0 text-amber-500 underline decoration-transparent underline-offset-4 hover:decoration-amber-500',
+  link: light
+    ? 'bg-transparent p-0 border-0 text-amber-800'
+    : 'bg-transparent p-0 border-0 text-amber-500',
 };
 
 const sizeClasses = compact ? 'px-6 py-3 text-small' : 'px-7 py-3.5 text-button';
 
 const isLink = variant === 'link';
 const classes = [
-  isLink ? '' : 'rounded-control',
+  isLink ? 'group' : 'rounded-control',
   'inline-flex items-center gap-2 font-sans font-semibold transition duration-200 ease-select',
   isLink ? 'text-button' : sizeClasses,
   variantClasses[variant],
@@ -48,5 +53,17 @@ const Element = href ? 'a' : 'button';
 ---
 
 <Element class={classes} href={href} type={href ? undefined : type} target={target} rel={rel}>
-  <slot />
+  {
+    isLink ? (
+      <span class="relative">
+        <slot />
+        <span
+          class="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-200 ease-select group-hover:scale-x-100"
+          aria-hidden="true"
+        />
+      </span>
+    ) : (
+      <slot />
+    )
+  }
 </Element>

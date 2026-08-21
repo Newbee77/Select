@@ -1,13 +1,71 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
+import Hero from '../../components/sections/Hero.astro';
+import TrustBar from '../../components/sections/TrustBar.astro';
+import ServiceCards from '../../components/sections/ServiceCards.astro';
+import SplitFeature from '../../components/sections/SplitFeature.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
+import TickList from '../../components/ui/TickList.astro';
 import { en } from '../../i18n/en';
+import customersImage from '../../assets/images/customers.png';
+import outstandingImage from '../../assets/images/outstanding.jpeg';
+import grassImage from '../../assets/images/thegrassisgreener.jpeg';
+
+const home = en.home;
 ---
 
 <BaseLayout title={en.meta.home.title} description={en.meta.home.description}>
-  <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
-    <Container>
-      <h1>{en.pages.home.h1}</h1>
-    </Container>
-  </section>
+  <Hero
+    eyebrow={home.hero.eyebrow}
+    heading={home.hero.heading}
+    lead={home.hero.lead}
+    ctaPrimaryLabel={home.hero.ctaPrimary}
+    ctaPrimaryHref="/en/what-we-do"
+    ctaSecondaryLabel={home.hero.ctaSecondary}
+    ctaSecondaryHref="/en/join-us"
+    image={customersImage}
+  />
+
+  <TrustBar items={home.trustBar} />
+
+  <ServiceCards
+    eyebrow={home.services.eyebrow}
+    heading={home.services.heading}
+    lead={home.services.lead}
+    cards={home.services.cards}
+    ctaLabel={home.services.cta}
+    ctaHref="/en/what-we-do"
+  />
+
+  <SplitFeature
+    eyebrow={home.whyUs.eyebrow}
+    heading={home.whyUs.heading}
+    light
+    image={outstandingImage}
+    ctaLabel={home.whyUs.cta}
+    ctaHref="/en/about"
+  >
+    {home.whyUs.paragraphs.map((paragraph) => <p class="mt-4 first:mt-0">{paragraph}</p>)}
+  </SplitFeature>
+
+  <SplitFeature
+    eyebrow={home.forConsultants.eyebrow}
+    heading={home.forConsultants.heading}
+    reverse
+    image={grassImage}
+    ctaLabel={home.forConsultants.cta}
+    ctaHref="/en/join-us"
+  >
+    <p class="max-w-lead text-lead text-ink-300">{home.forConsultants.lead}</p>
+    <Fragment slot="ticks">
+      <TickList items={home.forConsultants.ticks} />
+    </Fragment>
+  </SplitFeature>
+
+  <CtaBand
+    heading={home.ctaBand.heading}
+    text={home.ctaBand.text}
+    ctaLabel={home.ctaBand.cta}
+    ctaHref="/en/contact"
+  />
 </BaseLayout>

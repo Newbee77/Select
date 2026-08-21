@@ -1,0 +1,24 @@
+---
+import Container from '../ui/Container.astro';
+
+interface Props {
+  items: string[];
+}
+
+const { items }: Props = Astro.props;
+---
+
+<div class="border-y border-ink-700 bg-ink-900">
+  <Container class="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-7">
+    {
+      items.map((item, index) => (
+        <>
+          <span class="text-eyebrow uppercase text-ink-300">{item}</span>
+          {index < items.length - 1 && (
+            <span class="h-1 w-1 rotate-45 bg-amber-500" aria-hidden="true" />
+          )}
+        </>
+      ))
+    }
+  </Container>
+</div>

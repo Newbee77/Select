@@ -1,0 +1,24 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import Reveal from '../ui/Reveal.astro';
+
+interface Props {
+  heading: string;
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { heading, text, ctaLabel, ctaHref }: Props = Astro.props;
+---
+
+<section class="bg-amber-500 py-24 text-center text-ink-950 md:py-32 lg:py-40">
+  <Container>
+    <Reveal>
+      <h2 class="text-ink-950">{heading}</h2>
+      <p class="mx-auto mb-9 mt-[18px] max-w-lead text-ink-950">{text}</p>
+      <Button href={ctaHref} variant="dark">{ctaLabel}</Button>
+    </Reveal>
+  </Container>
+</section>

@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/clean-unreferenced-assets.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc --noEmit && eslint .",

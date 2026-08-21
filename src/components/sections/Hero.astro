@@ -1,0 +1,62 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  lead: string;
+  ctaPrimaryLabel: string;
+  ctaPrimaryHref: string;
+  ctaSecondaryLabel: string;
+  ctaSecondaryHref: string;
+  image: ImageMetadata;
+}
+
+const {
+  eyebrow,
+  heading,
+  lead,
+  ctaPrimaryLabel,
+  ctaPrimaryHref,
+  ctaSecondaryLabel,
+  ctaSecondaryHref,
+  image,
+}: Props = Astro.props;
+---
+
+<section
+  class="relative flex min-h-[88vh] items-center overflow-hidden bg-ink-950 pb-24 pt-[120px]"
+>
+  <Picture
+    src={image}
+    formats={['avif', 'webp']}
+    fallbackFormat="webp"
+    alt=""
+    width={image.width}
+    height={image.height}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover object-[center_62%] opacity-[0.32]"
+  />
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-ink-950 from-6% via-ink-950/60 via-40% to-ink-950/10 to-90%"
+  >
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-ink-950 from-2% to-transparent to-40%">
+  </div>
+
+  <Container class="relative z-10">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h1 class="max-w-[900px] text-balance">{heading}</h1>
+    <p class="mt-7 max-w-lead text-lead text-ink-300">{lead}</p>
+    <div class="mt-11 flex flex-wrap gap-4">
+      <Button href={ctaPrimaryHref} variant="primary">{ctaPrimaryLabel}</Button>
+      <Button href={ctaSecondaryHref} variant="ghost-dark">{ctaSecondaryLabel}</Button>
+    </div>
+  </Container>
+</section>

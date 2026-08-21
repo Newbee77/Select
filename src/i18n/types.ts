@@ -49,6 +49,48 @@ export interface NotFoundPage extends PagePlaceholder {
   backHome: string;
 }
 
+export interface HomeCard {
+  number: string;
+  title: string;
+  body: string;
+}
+
+export interface HomeDict {
+  hero: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+  trustBar: string[];
+  services: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    cards: HomeCard[];
+    cta: string;
+  };
+  whyUs: {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    cta: string;
+  };
+  forConsultants: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    ticks: string[];
+    cta: string;
+  };
+  ctaBand: {
+    heading: string;
+    text: string;
+    cta: string;
+  };
+}
+
 export interface PagesDict {
   home: PagePlaceholder;
   whatWeDo: PagePlaceholder;
@@ -67,4 +109,5 @@ export interface Dict {
   footer: FooterDict;
   meta: MetaDict;
   pages: PagesDict;
+  home: HomeDict;
 }
