@@ -1,0 +1,42 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  lead: string;
+  image?: ImageMetadata;
+}
+
+const { eyebrow, heading, lead, image }: Props = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-ink-950 py-24">
+  {
+    image && (
+      <>
+        <Picture
+          src={image}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          alt=""
+          width={image.width}
+          height={image.height}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink-950 from-10% to-ink-950/70 to-90%" />
+      </>
+    )
+  }
+  <Container class="relative z-10">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h1 class="max-w-[900px] text-balance">{heading}</h1>
+    <p class="mt-6 max-w-lead text-lead text-ink-300">{lead}</p>
+  </Container>
+</section>

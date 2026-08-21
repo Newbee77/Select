@@ -134,4 +134,140 @@ export const en: Dict = {
       backHome: 'Back to the homepage',
     },
   },
+  services: {
+    hero: {
+      eyebrow: 'For clients',
+      heading: 'Senior consultants, no middlemen',
+      lead: "You get the people you met. No juniors in disguise, no salesperson promising things the team hasn't heard about.",
+    },
+    process: {
+      steps: [
+        {
+          number: '01',
+          title: 'Analysis',
+          body: "We start by understanding. Where you are, where you're going, what's constraining you and actuall pain-points. You get a recommendation we can stand behind — not the one that happens to sell the most hours.",
+        },
+        {
+          number: '02',
+          title: 'Delivery',
+          body: 'Project management, development leadership and change management. We work inside your process, not around it. You get continuous visibility — no surprises at delivery.',
+        },
+        {
+          number: '03',
+          title: 'Follow-through',
+          body: "We measure against the goals we set, document what was done, and hand over so you can run it without us. That's the whole point.",
+        },
+      ],
+    },
+    skills: {
+      eyebrow: "What we're good at",
+      heading: 'We lead, analyse and transform',
+      groups: [
+        {
+          label: 'Leading',
+          tags: [
+            'Project management',
+            'IT project management',
+            'Development leadership',
+            'Change management',
+          ],
+        },
+        {
+          label: 'Analysing & designing',
+          tags: ['Requirements analysis', 'Architecture', 'Solution design'],
+        },
+        {
+          label: 'Transforming',
+          tags: ['Digitalisation', 'Process improvement', 'System implementation'],
+        },
+      ],
+      note: 'When delivery needs developers, we bring them in — but the leadership and the road there is what we do.',
+    },
+    ctaBand: {
+      heading: 'Need reinforcements?',
+      text: "Tell us what you're facing and we'll come back within a day.",
+      cta: 'Get in touch',
+    },
+  },
+  careers: {
+    hero: {
+      eyebrow: 'Careers',
+      heading: "We're picky. You should be too.",
+      lead: 'Select Society grows slowly on purpose. We bring in people we want to work with — and who have something to teach us.',
+    },
+    perks: [
+      {
+        number: '01',
+        title: 'Freedom with responsibility',
+        body: "You're senior. We treat you accordingly. You help choose your assignments, and we say no to the ones that don't fit.",
+      },
+      {
+        number: '02',
+        title: 'Actual development',
+        body: "Time and budget for certifications, conferences and the thing you've been meaning to learn but never had time for.",
+      },
+      {
+        number: '03',
+        title: 'A community you will notice',
+        body: "We meet regularly, share knowledge and enjoy ourselves. Consulting doesn't have to be lonely.",
+      },
+      {
+        number: '04',
+        title: 'Straight talk',
+        body: 'Open terms, clear expectations, no surprises in the payslip.',
+      },
+    ],
+    fit: {
+      heading: 'Would you fit in?',
+      paragraphs: [
+        "We're not looking for a particular method or certification. We're looking for people senior enough to know what they're doing, humble enough to keep learning, and sociable enough to want to contribute to a group.",
+        "If you've got a few years behind you and recognise yourself in that description — send an email. We read everything, and we reply. If we've got nothing right now, we'll let you know.",
+      ],
+    },
+    ctaBand: {
+      heading: "Send an email and we'll take it from there",
+      text: 'No template, no three-page cover letter. Tell us briefly who you are and what you want to do.',
+    },
+  },
+  about: {
+    hero: {
+      eyebrow: 'About Select Society',
+      heading: 'We took matters into our own hands',
+      lead: 'A consultancy started by consultants, for consultants — and therefore better for clients too.',
+    },
+    story: {
+      paragraphs: [
+        "We had all worked at consultancies before. We knew what worked and what didn't. Above all, we knew how often the latter came down to someone further up who had never actually sat in the assignment.",
+        'So we stopped waiting for someone else to build the right workplace and built it ourselves. Select Society runs on freedom with responsibility: we trust senior people to make good decisions, and we build the organisation around that.',
+        "It has consequences. We grow slowly. We turn down assignments that don't fit. We spend time and money on things that never show up in a quarterly report. And that's exactly why it works.",
+      ],
+    },
+    values: {
+      items: [
+        {
+          title: 'Freedom with responsibility',
+          consequence: "We don't track hours. We expect judgement.",
+        },
+        {
+          title: 'Senior all the way',
+          consequence: 'The person you meet in the sales meeting does the work.',
+        },
+        {
+          title: 'Community over scale',
+          consequence:
+            "We'd rather be thirty people who know each other than three hundred who don't.",
+        },
+      ],
+    },
+    team: {
+      members: [
+        { name: 'Name to be added', role: 'Role to be added' },
+        { name: 'Name to be added', role: 'Role to be added' },
+        { name: 'Name to be added', role: 'Role to be added' },
+        { name: 'Name to be added', role: 'Role to be added' },
+        { name: 'Name to be added', role: 'Role to be added' },
+        { name: 'Name to be added', role: 'Role to be added' },
+      ],
+    },
+  },
 };

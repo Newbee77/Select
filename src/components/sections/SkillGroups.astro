@@ -1,0 +1,50 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Tag from '../ui/Tag.astro';
+import Reveal from '../ui/Reveal.astro';
+
+interface Group {
+  label: string;
+  tags: string[];
+}
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  groups: Group[];
+  note: string;
+}
+
+const { eyebrow, heading, groups, note }: Props = Astro.props;
+---
+
+<section class="bg-paper py-24 md:py-32 lg:py-40">
+  <Container>
+    <Reveal>
+      <SectionHeading eyebrow={eyebrow} light>
+        {heading}
+      </SectionHeading>
+    </Reveal>
+
+    <div class="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+      {
+        groups.map((group) => (
+          <Reveal>
+            <Eyebrow light as="p">
+              {group.label}
+            </Eyebrow>
+            <div class="mt-5 flex flex-wrap gap-3">
+              {group.tags.map((tag) => (
+                <Tag light>{tag}</Tag>
+              ))}
+            </div>
+          </Reveal>
+        ))
+      }
+    </div>
+
+    <p class="mt-12 max-w-prose text-small text-ink-500">{note}</p>
+  </Container>
+</section>

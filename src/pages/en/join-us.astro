@@ -1,13 +1,60 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
 import Container from '../../components/ui/Container.astro';
+import Card from '../../components/ui/Card.astro';
+import Reveal from '../../components/ui/Reveal.astro';
 import { en } from '../../i18n/en';
+import { site } from '../../config/site';
+import molnImage from '../../assets/images/moln.jpg';
+
+const careers = en.careers;
 ---
 
 <BaseLayout title={en.meta.joinUs.title} description={en.meta.joinUs.description}>
-  <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
+  <PageHero
+    eyebrow={careers.hero.eyebrow}
+    heading={careers.hero.heading}
+    lead={careers.hero.lead}
+    image={molnImage}
+  />
+
+  <section class="bg-ink-900 py-24 md:py-32 lg:py-40">
     <Container>
-      <h1>{en.pages.joinUs.h1}</h1>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {
+          careers.perks.map((perk) => (
+            <Reveal>
+              <Card>
+                <Fragment slot="number">{perk.number}</Fragment>
+                <p class="mb-3 text-h3 text-white">{perk.title}</p>
+                <p class="text-small text-ink-300">{perk.body}</p>
+              </Card>
+            </Reveal>
+          ))
+        }
+      </div>
     </Container>
   </section>
+
+  <section class="bg-paper py-24 md:py-32 lg:py-40">
+    <Container>
+      <Reveal class="max-w-narrow">
+        <h2 class="text-ink-950">{careers.fit.heading}</h2>
+        {
+          careers.fit.paragraphs.map((paragraph) => (
+            <p class="mt-4 max-w-prose text-body text-ink-500 first:mt-6">{paragraph}</p>
+          ))
+        }
+      </Reveal>
+    </Container>
+  </section>
+
+  <CtaBand
+    heading={careers.ctaBand.heading}
+    text={careers.ctaBand.text}
+    ctaLabel={site.email}
+    ctaHref={`mailto:${site.email}`}
+  />
 </BaseLayout>

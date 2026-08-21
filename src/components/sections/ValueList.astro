@@ -1,0 +1,46 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Reveal from '../ui/Reveal.astro';
+
+interface Value {
+  title: string;
+  consequence: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  values: Value[];
+}
+
+const { eyebrow, heading, values }: Props = Astro.props;
+const hasHeading = Boolean(eyebrow || heading);
+---
+
+<section class="bg-ink-900 py-24 md:py-32 lg:py-40">
+  <Container>
+    {
+      hasHeading && (
+        <Reveal>
+          <SectionHeading eyebrow={eyebrow}>{heading}</SectionHeading>
+        </Reveal>
+      )
+    }
+    <div class:list={['grid gap-10 md:grid-cols-3 md:gap-10', hasHeading && 'mt-16']}>
+      {
+        values.map((value) => (
+          <Reveal>
+            <p class="text-h3 text-white">{value.title}</p>
+            <p class="mt-3 flex gap-3 text-body text-ink-300">
+              <span class="flex-none text-amber-500" aria-hidden="true">
+                →
+              </span>
+              <span>{value.consequence}</span>
+            </p>
+          </Reveal>
+        ))
+      }
+    </div>
+  </Container>
+</section>

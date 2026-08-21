@@ -101,6 +101,89 @@ export interface PagesDict {
   notFound: NotFoundPage;
 }
 
+export interface ProcessStep {
+  number: string;
+  title: string;
+  body: string;
+}
+
+export interface SkillGroup {
+  label: string;
+  tags: string[];
+}
+
+export interface ServicesDict {
+  hero: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+  };
+  process: {
+    steps: ProcessStep[];
+  };
+  skills: {
+    eyebrow: string;
+    heading: string;
+    groups: SkillGroup[];
+    note: string;
+  };
+  ctaBand: {
+    heading: string;
+    text: string;
+    cta: string;
+  };
+}
+
+export interface CareerPerk {
+  number: string;
+  title: string;
+  body: string;
+}
+
+export interface CareersDict {
+  hero: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+  };
+  perks: CareerPerk[];
+  fit: {
+    heading: string;
+    paragraphs: string[];
+  };
+  ctaBand: {
+    heading: string;
+    text: string;
+  };
+}
+
+export interface AboutValue {
+  title: string;
+  consequence: string;
+}
+
+export interface TeamMember {
+  name: string;
+  role: string;
+}
+
+export interface AboutDict {
+  hero: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+  };
+  story: {
+    paragraphs: string[];
+  };
+  values: {
+    items: AboutValue[];
+  };
+  team: {
+    members: TeamMember[];
+  };
+}
+
 export interface Dict {
   lang: Lang;
   htmlLang: string;
@@ -110,4 +193,7 @@ export interface Dict {
   meta: MetaDict;
   pages: PagesDict;
   home: HomeDict;
+  services: ServicesDict;
+  careers: CareersDict;
+  about: AboutDict;
 }

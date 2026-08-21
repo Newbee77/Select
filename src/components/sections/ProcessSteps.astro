@@ -1,0 +1,52 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Reveal from '../ui/Reveal.astro';
+
+interface Step {
+  number: string;
+  title: string;
+  body: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  steps: Step[];
+}
+
+const { eyebrow, heading, steps }: Props = Astro.props;
+const hasHeading = Boolean(eyebrow || heading);
+---
+
+<section class="bg-ink-900 py-24 md:py-32 lg:py-40">
+  <Container>
+    {
+      hasHeading && (
+        <Reveal>
+          <SectionHeading eyebrow={eyebrow}>{heading}</SectionHeading>
+        </Reveal>
+      )
+    }
+    <ol class:list={['relative grid gap-12 md:gap-16', hasHeading && 'mt-16']}>
+      <div
+        class="absolute bottom-4 left-[27px] top-4 hidden w-px bg-amber-500/40 md:block"
+        aria-hidden="true"
+      >
+      </div>
+      {
+        steps.map((step) => (
+          <Reveal as="li" class="relative grid gap-2 md:grid-cols-[56px_1fr] md:gap-8">
+            <span class="relative z-10 font-voga text-[2rem] leading-none text-amber-500">
+              {step.number}
+            </span>
+            <div>
+              <p class="mb-3 text-h3 text-white">{step.title}</p>
+              <p class="max-w-prose text-body text-ink-300">{step.body}</p>
+            </div>
+          </Reveal>
+        ))
+      }
+    </ol>
+  </Container>
+</section>

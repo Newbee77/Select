@@ -133,4 +133,140 @@ export const sv: Dict = {
       backHome: 'Till startsidan',
     },
   },
+  services: {
+    hero: {
+      eyebrow: 'För dig som köper IT',
+      heading: 'Seniora konsulter, utan mellanhänder',
+      lead: 'Ni får de personer ni träffat. Inga juniorer i förklädnad, ingen säljare som lovar något teamet inte känner till.',
+    },
+    process: {
+      steps: [
+        {
+          number: '01',
+          title: 'Analys',
+          body: 'Vi börjar med att förstå. Nuläge, mål, begränsningar, och vad som faktiskt skaver. Ni får en rekommendation vi kan stå för — inte den som råkar sälja flest timmar.',
+        },
+        {
+          number: '02',
+          title: 'Genomförande',
+          body: 'Projektledning, utvecklingsledning och förändringsledning. Vi arbetar i era processer, inte tvärtom. Ni får löpande insyn — inga överraskningar vid leverans.',
+        },
+        {
+          number: '03',
+          title: 'Uppföljning',
+          body: 'Vi mäter mot målen vi satte, dokumenterar det som gjordes och lämnar över så att ni klarar er utan oss. Det är hela poängen.',
+        },
+      ],
+    },
+    skills: {
+      eyebrow: 'Vad vi är bra på',
+      heading: 'Vi leder, analyserar och förändrar',
+      groups: [
+        {
+          label: 'Leda',
+          tags: [
+            'Projektledning',
+            'IT-projektledning',
+            'Utvecklingsledning',
+            'Förändringsledning',
+          ],
+        },
+        {
+          label: 'Analysera och designa',
+          tags: ['Kravanalys', 'Arkitektur', 'Lösningsdesign'],
+        },
+        {
+          label: 'Förändra',
+          tags: ['Digitalisering', 'Processutveckling', 'Systeminförande'],
+        },
+      ],
+      note: 'Behöver genomförandet utvecklare tar vi in dem — men det är ledningen och arbetet dit som är vårt.',
+    },
+    ctaBand: {
+      heading: 'Behöver ni förstärkning?',
+      text: 'Berätta vad ni står inför så återkommer vi inom ett dygn.',
+      cta: 'Kontakta oss',
+    },
+  },
+  careers: {
+    hero: {
+      eyebrow: 'Karriär',
+      heading: 'Vi är kräsna. Var det du också.',
+      lead: 'Select Society växer långsamt med flit. Vi tar in människor vi själva vill jobba med — och som har något att lära oss.',
+    },
+    perks: [
+      {
+        number: '01',
+        title: 'Frihet under ansvar',
+        body: 'Du är senior. Vi behandlar dig därefter. Du är med och väljer uppdrag, och vi säger nej till sådant som inte passar dig.',
+      },
+      {
+        number: '02',
+        title: 'Utveckling på riktigt',
+        body: 'Tid och budget för certifieringar, konferenser och det där du velat lära dig men aldrig hunnit.',
+      },
+      {
+        number: '03',
+        title: 'En gemenskap som märks',
+        body: 'Vi ses regelbundet, delar kunskap och har roligt. Konsultrollen behöver inte vara ensam.',
+      },
+      {
+        number: '04',
+        title: 'Rak kommunikation',
+        body: 'Öppna villkor, tydliga förväntningar, inga överraskningar i lönekuvertet.',
+      },
+    ],
+    fit: {
+      heading: 'Passar du hos oss?',
+      paragraphs: [
+        'Vi letar inte efter en viss metod eller certifiering. Vi söker efter personer som är seniora nog att veta vad de gör, ödmjuka nog att fortsätta lära sig, och sällskapliga nog att vilja bidra till en grupp.',
+        'Har du några års erfarenhet och känner igen dig — skicka ett mejl. Vi läser allt, och vi svarar. Har vi inget just nu säger vi det rakt ut.',
+      ],
+    },
+    ctaBand: {
+      heading: 'Skicka ett mejl, så tar vi det därifrån',
+      text: 'Ingen mall, inget personligt brev på tre sidor. Berätta kort vem du är och vad du vill göra.',
+    },
+  },
+  about: {
+    hero: {
+      eyebrow: 'Om Select Society',
+      heading: 'Vi tog saken i egna händer',
+      lead: 'Ett konsultbolag startat av konsulter, för konsulter — och därför också bättre för kunderna.',
+    },
+    story: {
+      paragraphs: [
+        'Vi hade alla jobbat på konsultbolag förut. Vi visste vad som fungerade och vad som inte gjorde det. Framför allt visste vi hur ofta det senare berodde på att någon längre upp aldrig hade suttit i uppdraget.',
+        'Så vi slutade vänta på att någon annan skulle bygga rätt arbetsplats, och byggde den själva. Select Society drivs på principen frihet under ansvar: vi litar på att seniora människor fattar bra beslut, och vi bygger organisationen därefter.',
+        'Det får konsekvenser. Vi växer långsamt. Vi tackar nej till uppdrag som inte passar. Vi lägger tid och pengar på sådant som inte syns i en kvartalsrapport. Och det är precis därför det fungerar.',
+      ],
+    },
+    values: {
+      items: [
+        {
+          title: 'Frihet under ansvar',
+          consequence: 'Vi kontrollerar inte tider. Vi förväntar oss omdöme.',
+        },
+        {
+          title: 'Seniort hela vägen',
+          consequence: 'Den du träffar i säljmötet är den som gör jobbet.',
+        },
+        {
+          title: 'Gemenskap före storlek',
+          consequence:
+            'Vi är hellre trettio som känner varandra än trehundra som inte gör det.',
+        },
+      ],
+    },
+    team: {
+      members: [
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+        { name: 'Namn tillkommer', role: 'Roll tillkommer' },
+      ],
+    },
+  },
 };

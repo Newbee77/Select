@@ -1,0 +1,20 @@
+---
+interface Props {
+  light?: boolean;
+  class?: string;
+}
+
+const { light = false, class: className }: Props = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-control border px-[18px] py-2.5 text-small transition-colors duration-200 ease-select',
+    light
+      ? 'border-ink-100 text-ink-950 hover:border-amber-800'
+      : 'border-ink-600 text-ink-100 hover:border-amber-500',
+    className,
+  ]}
+>
+  <slot />
+</span>

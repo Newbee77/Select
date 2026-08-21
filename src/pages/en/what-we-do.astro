@@ -1,13 +1,34 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import ProcessSteps from '../../components/sections/ProcessSteps.astro';
+import SkillGroups from '../../components/sections/SkillGroups.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
 import { en } from '../../i18n/en';
+
+const services = en.services;
 ---
 
 <BaseLayout title={en.meta.whatWeDo.title} description={en.meta.whatWeDo.description}>
-  <section class="bg-ink-950 py-24 md:py-32 lg:py-40">
-    <Container>
-      <h1>{en.pages.whatWeDo.h1}</h1>
-    </Container>
-  </section>
+  <PageHero
+    eyebrow={services.hero.eyebrow}
+    heading={services.hero.heading}
+    lead={services.hero.lead}
+  />
+
+  <ProcessSteps steps={services.process.steps} />
+
+  <SkillGroups
+    eyebrow={services.skills.eyebrow}
+    heading={services.skills.heading}
+    groups={services.skills.groups}
+    note={services.skills.note}
+  />
+
+  <CtaBand
+    heading={services.ctaBand.heading}
+    text={services.ctaBand.text}
+    ctaLabel={services.ctaBand.cta}
+    ctaHref="/en/contact"
+  />
 </BaseLayout>
