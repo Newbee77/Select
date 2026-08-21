@@ -137,7 +137,7 @@ Tre steg som ett vertikalt spår med guldlinje som binder ihop dem. Samma tre st
 
 **01 · Analys / Analysis**
 > SV: Vi börjar med att förstå. Nuläge, mål, begränsningar, och vad som faktiskt skaver. Ni får en rekommendation vi kan stå för — inte den som råkar sälja flest timmar.
-> EN: We start by understanding. Where you are, where you're going, what's constraining you and actuall pain-points. You get a recommendation we can stand behind — not the one that happens to sell the most hours.
+> EN: We start by understanding. Where you are, where you're going, what's constraining you and actual pain-points. You get a recommendation we can stand behind — not the one that happens to sell the most hours.
 
 **02 · Genomförande / Delivery**
 > SV: Projektledning, utvecklingsledning och förändringsledning. Vi arbetar i era processer, inte tvärtom. Ni får löpande insyn — inga överraskningar vid leverans.
